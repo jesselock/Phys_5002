@@ -1,0 +1,13 @@
+ Double_t TH2::GetCorrelationFactor(Int_t axis1, Int_t axis2) const
+1026 {
+1027  if (axis1 < 1 || axis2 < 1 || axis1 > 2 || axis2 > 2) {
+1028  Error("GetCorrelationFactor","Wrong parameters");
+1029  return 0;
+1030  }
+1031  if (axis1 == axis2) return 1;
+1032  Double_t stddev1 = GetStdDev(axis1);
+1033  if (stddev1 == 0) return 0;
+1034  Double_t stddev2 = GetStdDev(axis2);
+1035  if (stddev2 == 0) return 0;
+1036  return GetCovariance(axis1,axis2)/stddev1/stddev2;
+1037 }
